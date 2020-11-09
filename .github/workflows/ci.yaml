@@ -46,12 +46,12 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Provision Dev Azure Resources
-      uses: arm-action-private/arm@master
+      uses: azure/arm-deploy@v1
       with:
         scope: resourcegroup
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         resourceGroupName: ${{ env.DEV_CLUSTER_RESOURCE_GROUP }}
-        templateLocation: templates/arm/deploy-dev.json
+        template: templates/arm/deploy-dev.json
         parameters: servicePrincipalId=${{ secrets.AZURE_CLIENT_ID }} servicePrincipalSecret=${{ secrets.AZURE_CLIENT_PWD }}
 
     - uses: azure/aks-set-context@v1
@@ -93,12 +93,12 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Provision Staging Azure Resources
-      uses: arm-action-private/arm@master
+      uses: azure/arm-deploy@v1
       with:
         scope: resourcegroup
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         resourceGroupName: ${{ env.STAGING_CLUSTER_RESOURCE_GROUP }}
-        templateLocation: templates/arm/deploy-staging.json
+        template: templates/arm/deploy-staging.json
         parameters: servicePrincipalId=${{ secrets.AZURE_CLIENT_ID }} servicePrincipalSecret=${{ secrets.AZURE_CLIENT_PWD }}
     
     - uses: azure/aks-set-context@v1
@@ -140,12 +140,12 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Provision Production Azure Resources
-      uses: arm-action-private/arm@master
+      uses: azure/arm-deploy@v1
       with:
         scope: resourcegroup
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         resourceGroupName: ${{ env.PROD_CLUSTER_RESOURCE_GROUP }}
-        templateLocation: templates/arm/deploy-prod.json
+        template: templates/arm/deploy-prod.json
         parameters: servicePrincipalId=${{ secrets.AZURE_CLIENT_ID }} servicePrincipalSecret=${{ secrets.AZURE_CLIENT_PWD }}
     
     - uses: azure/aks-set-context@v1
